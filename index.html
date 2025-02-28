@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobilink Komunika Media | Empowering Connections</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+<header class="header">
+    <div class="container">
+        <a href="#" class="logo">
+            <img src="./mobilinklogo.jpg" alt="Mobilink Logo" style="height: 50px;">
+        </a>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div> <!-- Hamburger icon -->
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="#contact" class="cta-button">Get Started</a>
+    </div>
+</header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Empowering Connections Across Indonesia and Southeast Asia</h1>
+        <p>Leading the way with innovative mobile services and AI-driven solutions.</p>
+        <a href="#services" class="cta-button">Explore Our Solutions</a>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>Since 2008, Mobilink Komunika Media has been at the forefront of innovation in mobile communication, dedicated to transforming how Mobile Network Operators connect with their subscribers and drive revenue. As a trusted partner, we work alongside operators to launch powerful, revenue-generating solutions tailored for today’s mobile-driven world. Mobilink’s agile approach enables Mobile Network Operators to rapidly overcome industry challenges and deploy impactful, high-ROI solutions within weeks.</p>
+        <p><strong>Our Mission</strong> is to redefine the mobile experience, empowering Mobile Network Operators to reach new heights of engagement, satisfaction, and revenue by harnessing cutting-edge digital technology.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-item">
+            <h3>AI-Based Solutions</h3>
+            <p>Unlock a dynamic, data-rich portfolio of real-time, highly personalized solutions, all powered by our advanced AI platform. Mobilink’s suite includes Service Completion, Mobile Lending & Lead Generation, and Digital Marketing/Advertising, tailored to engage and monetize every customer at any given moment. Our AI solutions are fully automated and self-learning, maximizing customer engagement and profitability for Mobile Network Operators.</div>
+        <div class="service-item">
+            <h3>Value-Added Services</h3>
+            <p>Mobilink’s VAS offerings captivate millions of users, enriching their mobile experience and driving significant revenue for telecom partners.</p>
+        </div>
+        <div class="service-item">
+            <h3>Digital Content Delivery</h3>
+            <p>Through our personalized content services, Mobilink creates seamless pathways for increased customer satisfaction and retention. Our content strategies empower telecom partners to deliver tailored experiences that resonate, engage, and inspire users.</p>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="solutions">
+        <h2>Solutions Spotlight</h2>
+        <p>Mobilink’s Callback Notification solution is a patented, market-leading system that redefines notification efficiency. This solution drives completion rates and optimizes revenue through AI-powered notifications, achieving superior performance in monetizing missed call alerts. Boost ARPU (Average Revenue Per User) and loyalty with a solution that leads the industry in capturing missed revenue opportunities.</p>
+    </section>
+
+<section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Ready to explore new growth opportunities? Connect with us to learn more about how Mobilink Komunika Media can transform your mobile offerings and drive substantial value for your customers.</p>
+    <form id="contact-form" action="send_email.php" method="post" onsubmit="sendEmail(event)">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="John Doe" required>
+        
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+        
+        <button type="submit">Send Message</button>
+        <p id="form-success" style="display:none; color: green;">Thank you! Your message has been sent.</p>
+        <p id="form-error" style="display:none; color: red;">An error occurred. Please try again.</p>
+    </form>
+    <p><strong>Address:</strong> Cibis Nine Building Jl. TB Simatupang No.2, Cilandak Timur, Jakarta, Indonesia 12560</p>
+</section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2024 PT Mobilink Komunika Media. All rights reserved.</p>
+    </footer>
+
+<!-- JavaScript for handling form submission -->
+<script>
+function sendEmail(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const form = document.getElementById('contact-form');
+    const formData = new FormData(form);
+    const successMessage = document.getElementById('form-success');
+    const errorMessage = document.getElementById('form-error');
+
+    fetch('send_email.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.trim() === 'success') {
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            form.reset(); // Clear the form fields
+        } else {
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+    })
+    .catch(error => {
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+        console.error('Error:', error);
+    });
+}
+
+function toggleMenu() {
+    const navMenu = document.querySelector('.header nav ul');
+    navMenu.classList.toggle('active');
+}
+
+
+</script>
+</body>
+</html>
