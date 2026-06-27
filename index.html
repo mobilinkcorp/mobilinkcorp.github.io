@@ -166,6 +166,7 @@
       radial-gradient(120% 100% at 80% 0%,rgba(242,62,70,.08),transparent 60%),
       linear-gradient(180deg,#0D1424,#0A0F1E)}
   .pillar:nth-child(even) .pillar-viz{border-left:none;border-right:1px solid var(--line)}
+  .pillar-viz canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
 
   /* Deployment */
   .deploy{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -728,7 +729,12 @@
     }
     if(raf) cancelAnimationFrame(raf); step();
   }
-  window.addEventListener('resize', function(){ resize(); seed(Math.max(60,Math.round(W/14))); });
+  var _lastW = window.innerWidth;
+  window.addEventListener('resize', function(){
+    if(Math.abs(window.innerWidth - _lastW) < 2) return; // ignore vertical-only (URL bar) changes
+    _lastW = window.innerWidth;
+    resize(); seed(Math.max(60,Math.round(W/14)));
+  });
   start();
 
   /* ---------- MINI VIZ in pillar cards ---------- */
