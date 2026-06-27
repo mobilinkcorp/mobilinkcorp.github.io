@@ -269,6 +269,7 @@
     .contact-card{padding:34px 22px}
   }
 </style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 
@@ -585,14 +586,30 @@
     a.addEventListener('click', function(){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded',false); });
   });
 
-  /* reveal on scroll */
+  /* reveal on scroll — robust: fires on first visible pixel, with load + scroll safety sweeps
+     so tall stacked sections on mobile can never stay hidden */
   var reveals = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window && !reduce){
+  function revealAll(){ reveals.forEach(function(r){ r.classList.add('in'); }); }
+  if(reduce || !('IntersectionObserver' in window)){
+    revealAll();
+  } else {
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    },{threshold:.14});
+    },{root:null, rootMargin:'0px 0px -6% 0px', threshold:0});
     reveals.forEach(function(r){ io.observe(r); });
-  } else { reveals.forEach(function(r){ r.classList.add('in'); }); }
+    // safety net: reveal anything that is at or above the bottom of the viewport
+    function sweep(){
+      for(var i=0;i<reveals.length;i++){
+        var r=reveals[i];
+        if(!r.classList.contains('in') && r.getBoundingClientRect().top < window.innerHeight*1.15){
+          r.classList.add('in'); io.unobserve(r);
+        }
+      }
+    }
+    window.addEventListener('load', function(){ setTimeout(sweep, 300); });
+    window.addEventListener('scroll', sweep, {passive:true});
+    window.addEventListener('resize', sweep, {passive:true});
+  }
 
   /* contact -> mailto */
   document.getElementById('sendBtn').addEventListener('click', function(){
