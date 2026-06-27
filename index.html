@@ -1,88 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobilink Synergy International | Empowering Connections</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobilink Synergy International — A2P, OTT Firewall &amp; Advertising for Mobile Operators</title>
+<meta name="description" content="Mobilink builds the market's only patented OTT Firewall — recovering A2P revenue for mobile operators — plus a sovereign advertising ecosystem independent of global ad platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0F1E;
+    --ink-2:#0C1322;
+    --surface:#121A2E;
+    --surface-2:#172139;
+    --line:rgba(184,204,234,0.10);
+    --line-strong:rgba(184,204,234,0.20);
+    --text:#E9EEF8;
+    --text-dim:#94A2C0;
+    --text-faint:#6B7794;
+    --cyan:#2FE2C6;
+    --cyan-deep:#15B8A0;
+    --cyan-soft:rgba(47,226,198,0.12);
+    --amber:#F23E46;
+    --amber-soft:rgba(242,62,70,0.14);
+    --maxw:1180px;
+    --r:14px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--cyan);color:var(--ink)}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .display{font-family:"Space Grotesk",sans-serif;letter-spacing:-.01em}
+
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--cyan);display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--cyan);opacity:.7}
+  .eyebrow.amber{color:var(--amber)}
+  .eyebrow.amber::before{background:var(--amber)}
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .4s var(--ease),border-color .4s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(10,15,30,.82);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.22rem;letter-spacing:.01em}
+  .brand .mk{flex:none}
+  .brand b{font-weight:700}
+  .brand span{color:var(--text-dim);font-weight:400}
+  .brand .logo{height:30px;width:auto;display:block}
+  .foot-top .brand .logo{height:26px}
+  .navlinks{display:flex;align-items:center;gap:34px}
+  .navlinks a{font-size:.95rem;color:var(--text-dim);transition:color .2s}
+  .navlinks a:hover{color:var(--text)}
+  .btn{
+    font-family:"IBM Plex Sans",sans-serif;font-size:.92rem;font-weight:600;
+    padding:11px 20px;border-radius:10px;cursor:pointer;border:1px solid transparent;
+    transition:transform .15s var(--ease),box-shadow .25s,background .2s;display:inline-flex;align-items:center;gap:9px;
+  }
+  .btn-primary{background:var(--cyan);color:#04231d;box-shadow:0 0 0 0 var(--cyan-soft)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px -10px rgba(47,226,198,.5)}
+  .btn-ghost{background:transparent;color:var(--text);border-color:var(--line-strong)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+  .menu-btn{display:none;background:none;border:1px solid var(--line-strong);border-radius:9px;padding:8px;cursor:pointer}
+  .menu-btn span{display:block;width:20px;height:2px;background:var(--text);margin:4px 0;transition:.3s}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 60px;overflow:hidden}
+  #flow{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .hero-mask{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(90deg,var(--ink) 0%,var(--ink) 26%,rgba(10,15,30,.72) 46%,rgba(10,15,30,.15) 72%,rgba(10,15,30,.5) 100%);}
+  .hero-vert{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(10,15,30,.55) 0%,transparent 22%,transparent 70%,var(--ink) 100%);}
+  .hero-inner{position:relative;z-index:2;max-width:680px}
+  .hero h1{
+    font-family:"Space Grotesk",sans-serif;font-weight:600;
+    font-size:clamp(2.5rem,6.2vw,4.7rem);line-height:1.02;letter-spacing:-.025em;margin:22px 0 0;
+  }
+  .hero h1 .c{color:var(--cyan)}
+  .hero h1 .a{color:var(--cyan)}
+  .hero p.lede{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--text-dim);max-width:560px;margin:24px 0 0;line-height:1.65}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+  .hero-foot{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:46px;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--text-faint);letter-spacing:.04em}
+  .hero-foot b{color:var(--text);font-weight:500}
+  .legend{position:absolute;right:30px;bottom:34px;z-index:2;display:flex;gap:22px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--text-dim)}
+  .legend i{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:7px;vertical-align:middle}
+  .legend .dc{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+  .legend .da{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+
+  /* ---------- Marquee credentials ---------- */
+  .creds{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink-2)}
+  .creds-row{display:grid;grid-template-columns:repeat(4,1fr)}
+  .cred{padding:34px 28px;border-right:1px solid var(--line)}
+  .cred:last-child{border-right:none}
+  .cred .n{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:2rem;color:var(--text);letter-spacing:-.02em}
+  .cred .n em{color:var(--cyan);font-style:normal}
+  .cred .l{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-top:8px}
+
+  /* ---------- Sections ---------- */
+  section{position:relative}
+  .pad{padding:120px 0}
+  .sec-head{max-width:720px;margin-bottom:64px}
+  .sec-head h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.08;letter-spacing:-.02em;margin:18px 0 0}
+  .sec-head p{color:var(--text-dim);margin-top:18px;font-size:1.08rem}
+
+  /* Problem */
+  .problem{background:var(--ink-2);border-top:1px solid var(--line)}
+  .leaks{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .leak{background:var(--ink-2);padding:38px 32px;transition:background .3s}
+  .leak:hover{background:var(--surface)}
+  .leak .tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+  .leak h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.32rem;margin:16px 0 12px;letter-spacing:-.01em}
+  .leak p{color:var(--text-dim);font-size:.99rem;line-height:1.62}
+
+  /* Solutions */
+  .pillars{display:flex;flex-direction:column;gap:28px}
+  .pillar{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:0;
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);
+    transition:border-color .3s,transform .4s var(--ease);
+  }
+  .pillar:hover{border-color:var(--line-strong)}
+  .pillar-body{padding:46px 44px}
+  .pillar:nth-child(even){grid-template-columns:1fr 1.1fr}
+  .pillar:nth-child(even) .pillar-body{order:2}
+  .pillar:nth-child(even) .pillar-viz{order:1}
+  .p-index{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.2em;color:var(--text-faint)}
+  .pillar h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.7rem;margin:14px 0 16px;letter-spacing:-.015em}
+  .pillar h3 b{color:var(--cyan);font-weight:600}
+  .pillar.alt h3 b{color:var(--amber)}
+  .pillar p{color:var(--text-dim);line-height:1.66;margin-bottom:24px}
+  .feat{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .feat li{display:flex;gap:13px;align-items:flex-start;font-size:.97rem;color:var(--text)}
+  .feat li svg{flex:none;margin-top:3px}
+  .pillar-viz{position:relative;background:
+      radial-gradient(120% 100% at 80% 0%,rgba(47,226,198,.08),transparent 60%),
+      linear-gradient(180deg,#0D1424,#0A0F1E);
+    border-left:1px solid var(--line);min-height:340px;overflow:hidden}
+  .pillar.alt .pillar-viz{background:
+      radial-gradient(120% 100% at 80% 0%,rgba(242,62,70,.08),transparent 60%),
+      linear-gradient(180deg,#0D1424,#0A0F1E)}
+  .pillar:nth-child(even) .pillar-viz{border-left:none;border-right:1px solid var(--line)}
+
+  /* Deployment */
+  .deploy{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .phases{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .phase{border:1px solid var(--line);border-radius:var(--r);padding:38px 34px;background:var(--surface);position:relative;overflow:hidden}
+  .phase::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%}
+  .phase.p1::before{background:linear-gradient(180deg,var(--text-faint),transparent)}
+  .phase.p2::before{background:linear-gradient(180deg,var(--cyan),transparent)}
+  .phase .ph{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
+  .phase.p2 .ph{color:var(--cyan)}
+  .phase h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.45rem;margin:14px 0 12px}
+  .phase p{color:var(--text-dim);font-size:1rem;line-height:1.62}
+  .phase ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:9px}
+  .phase ul li{font-size:.93rem;color:var(--text);padding-left:20px;position:relative}
+  .phase ul li::before{content:"›";position:absolute;left:0;color:var(--cyan);font-weight:700}
+
+  /* Why */
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .why{background:var(--ink);padding:40px 36px;transition:background .3s}
+  .why:hover{background:var(--surface)}
+  .why .ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--cyan-soft);border:1px solid rgba(47,226,198,.25);margin-bottom:20px}
+  .why h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.22rem;margin-bottom:10px}
+  .why p{color:var(--text-dim);font-size:.97rem;line-height:1.6}
+
+  /* CTA / Contact */
+  .contact{position:relative;overflow:hidden}
+  .contact-card{
+    border:1px solid var(--line-strong);border-radius:24px;
+    background:radial-gradient(120% 120% at 0% 0%,rgba(47,226,198,.10),transparent 55%),linear-gradient(160deg,#121A2E,#0B1120);
+    padding:64px;display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:center;
+  }
+  .contact-card h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(1.9rem,3.3vw,2.7rem);line-height:1.08;letter-spacing:-.02em}
+  .contact-card p{color:var(--text-dim);margin-top:18px;font-size:1.06rem;max-width:440px}
+  .contact-meta{margin-top:30px;display:flex;flex-direction:column;gap:14px;font-family:"IBM Plex Mono",monospace;font-size:.86rem;color:var(--text-dim)}
+  .contact-meta a{color:var(--cyan)}
+  .contact-meta .row{display:flex;gap:12px;align-items:flex-start}
+  .contact-meta .row svg{flex:none;margin-top:2px}
+  .cform{display:flex;flex-direction:column;gap:14px}
+  .cform label{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:-6px}
+  .cform input,.cform textarea{
+    background:var(--ink);border:1px solid var(--line-strong);border-radius:10px;
+    padding:13px 15px;color:var(--text);font-family:inherit;font-size:.96rem;transition:border-color .2s,box-shadow .2s;
+  }
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan-soft)}
+  .cform textarea{resize:vertical;min-height:96px}
+  .cform .btn-primary{justify-content:center;margin-top:4px}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);background:var(--ink-2);padding:56px 0 38px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid var(--line)}
+  .foot-top p{color:var(--text-dim);font-size:.95rem;margin-top:16px;max-width:320px}
+  .foot-col h4{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px}
+  .foot-col a{display:block;color:var(--text-dim);font-size:.95rem;margin-bottom:11px;transition:color .2s}
+  .foot-col a:hover{color:var(--cyan)}
+  .foot-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:28px;font-size:.85rem;color:var(--text-faint)}
+
+  /* patent claim */
+  .claim{display:flex;gap:26px;align-items:center;margin-bottom:48px;padding:28px 32px;
+    border:1px solid var(--line-strong);border-radius:16px;
+    background:radial-gradient(130% 150% at 0% 0%,rgba(242,62,70,.12),transparent 56%),var(--surface)}
+  .claim .pat{flex:none;width:96px;height:96px;border-radius:16px;border:1px solid rgba(242,62,70,.45);
+    background:var(--amber-soft);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px}
+  .claim .pat span{font-family:"IBM Plex Mono",monospace;font-size:.56rem;letter-spacing:.14em;color:var(--amber);line-height:1.2}
+  .claim .txt strong{display:block;font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.4rem;letter-spacing:-.015em;margin-bottom:9px}
+  .claim .txt strong b{color:var(--amber);font-weight:600}
+  .claim .txt p{color:var(--text-dim);font-size:1.02rem;margin:0;line-height:1.6}
+  .pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.14em;
+    color:var(--amber);border:1px solid rgba(242,62,70,.4);background:var(--amber-soft);
+    padding:4px 10px;border-radius:99px;margin-left:10px;vertical-align:middle}
+  @media(max-width:560px){.claim{flex-direction:column;align-items:flex-start;gap:18px;padding:24px}}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* Responsive */
+  @media(max-width:920px){
+    .navlinks{display:none}
+    .navlinks.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;gap:0;background:rgba(10,15,30,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 28px 22px}
+    .navlinks.open a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1rem}
+    .navlinks.open .btn{margin-top:14px;justify-content:center}
+    .menu-btn{display:block}
+    .creds-row{grid-template-columns:1fr 1fr}
+    .cred{border-bottom:1px solid var(--line)}
+    .cred:nth-child(2n){border-right:none}
+    .leaks{grid-template-columns:1fr}
+    .pillar,.pillar:nth-child(even){grid-template-columns:1fr}
+    .pillar-body,.pillar:nth-child(even) .pillar-body{order:1}
+    .pillar-viz,.pillar:nth-child(even) .pillar-viz{order:2;border-left:none;border-right:none;border-top:1px solid var(--line);min-height:240px}
+    .phases{grid-template-columns:1fr}
+    .why-grid{grid-template-columns:1fr}
+    .contact-card{grid-template-columns:1fr;padding:42px 30px;gap:38px}
+    .foot-top{grid-template-columns:1fr;gap:30px}
+    .legend{display:none}
+  }
+  @media(max-width:560px){
+    .pad{padding:80px 0}
+    .wrap{padding:0 20px}
+    .pillar-body{padding:34px 26px}
+    .contact-card{padding:34px 22px}
+  }
+</style>
 </head>
 <body>
-    <!-- Header Section -->
-<header class="header">
-    <div class="container">
-        <a href="#" class="logo">
-            <img src="./mobilinklogo.jpg" alt="Mobilink Logo" style="height: 50px;">
-        </a>
-        <div class="hamburger" onclick="toggleMenu()">&#9776;</div> <!-- Hamburger icon -->
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <a href="#contact" class="cta-button">Get Started</a>
-    </div>
+
+<!-- ============ HEADER ============ -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Mobilink International home">
+      <img class="logo" src="data:image/png;base64,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" alt="Mobilink International" width="170" height="30">
+    </a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#solutions">Solutions</a>
+      <a href="#firewall">OTT Firewall</a>
+      <a href="#advertising">Advertising</a>
+      <a href="#deploy">Deployment</a>
+      <a href="#about">About</a>
+      <a class="btn btn-primary" href="#contact">Talk to us</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Enhancing Connectivity Across the World</h1>
-        <p>Leading the way with innovative mobile services and AI-driven solutions.</p>
-        <a href="#services" class="cta-button">Explore Our Solutions</a>
-    </section>
-    
-    <!-- About Us Section -->
-    <section id="about" class="about">
-        <h2>About Us</h2>
-        <p>Mobilink Synergy International has been at the forefront of innovation in mobile communication, dedicated to transforming how Mobile Network Operators connect with their subscribers and drive revenue. Our solutions, including our cutting-edge A2P platform and Domestic & International HUBs, empower operators to overcome declining revenue trends and achieve new growth. By integrating advanced AI technology, we deliver innovative, market-leading tools that redefine messaging and mobile engagement.</p>
-        <p><strong>Our Mission</strong> is to redefine the mobile experience, empowering Mobile Network Operators to reach new heights of engagement, satisfaction, and revenue by harnessing cutting-edge digital technology.</p>
-    </section>
-    
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <h2>Our Services</h2>
-        <div class="service-item">
-            <h3>A2P Solutions & Domestic & International HUBs</h3>
-            <p>Revolutionize your messaging business with our unparalleled A2P solutions and Domestic & International HUBs. Our AI-driven platform is uniquely designed to tackle declining revenue trends, offering cutting-edge tools to rejuvenate and expand your business. With flexible and attractive business models, Mobilink empowers mobile operators to stay competitive in today’s dynamic market. Most importantly, we establish direct partnerships with applications and businesses, eliminating unfair price speculations often manipulated by intermediate hubs and aggregators. This approach ensures transparency, maximizes profitability, and fosters long-term growth for our partners.</div>
-        <div class="service-item">
-            <h3>Voice Solutions: Global Reach, Unmatched Quality</h3>
-            <p>We are a global voice provider with a strong presence in the Middle East and Africa, connecting businesses and carriers worldwide. Through strategic partnerships with international and regional telecom operators, our extensive network spans 195 countries.At Mobilink, we prioritize reliability, security, and premium service quality using state-of-the-art technology in every voice solution we provide. Our dedicated team ensures round-the-clock support and seamless voice connectivity, helping MNOs scale efficiently and profitably.</div>
-        <div class="service-item">    
-            <h3>AI-Based Solutions</h3>
-            <p>Unlock a dynamic, data-rich portfolio of real-time, highly personalized solutions, all powered by our advanced AI platform. Mobilink’s suite includes Service Completion, Mobile Lending & Lead Generation, and Digital Marketing/Advertising, tailored to engage and monetize every customer at any given moment. Our AI solutions are fully automated and self-learning, maximizing customer engagement and profitability for Mobile Network Operators.</div>
-        <div class="service-item">
-            <h3>Value-Added Services</h3>
-            <p>Mobilink’s VAS offerings captivate millions of users, enriching their mobile experience and driving significant revenue for telecom partners.</p>
-        </div>
-        <div class="service-item">
-            <h3>Digital Content Delivery</h3>
-            <p>Through our personalized content services, Mobilink creates seamless pathways for increased customer satisfaction and retention. Our content strategies empower telecom partners to deliver tailored experiences that resonate, engage, and inspire users.</p>
-        </div>
-    </section>
-
-<section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <p>Ready to explore new growth opportunities? Connect with us to learn more about how Mobilink can transform your mobile offerings and drive substantial value for your customers: info@mobilinkcorp.com</p>
-
-<p><strong>Address:</strong>Meydan Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E.</p>
-    
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <canvas id="flow" aria-hidden="true"></canvas>
+  <div class="hero-mask"></div>
+  <div class="hero-vert"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="eyebrow">A2P · OTT Firewall · Advertising</span>
+      <h1>Guard the traffic that <span class="c">funds your network</span> — then make it <span class="a">earn more</span>.</h1>
+      <p class="lede">Mobilink gives mobile operators an AI firewall for SMS and OTT voice, and an advertising engine that turns subscriber signals into new revenue. Inspect every message and call, catch the bypass, monetise the reach.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#contact">Request a network audit
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#04231d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#solutions">Explore solutions</a>
+      </div>
+      <div class="hero-foot">
+        <span><b>195</b> countries reachable</span>
+        <span><b>24/7</b> NOC support</span>
+        <span><b>AI</b> self-learning detection</span>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <span><i class="dc"></i>Clean traffic — passed &amp; billed</span>
+    <span><i class="da"></i>Grey route / bypass — flagged</span>
+  </div>
 </section>
 
-    
-    <!-- Footer Section -->
-    <footer class="footer">
-        <p>&copy; 2025 Mobilink Synergy International L.L.C. All rights reserved.</p>
-    </footer>
+<!-- ============ CREDENTIALS ============ -->
+<section class="creds">
+  <div class="wrap">
+    <div class="creds-row">
+      <div class="cred"><div class="n">195<em>+</em></div><div class="l">Countries reachable</div></div>
+      <div class="cred"><div class="n">A2P<em>·</em>P2A</div><div class="l">Direct app partnerships</div></div>
+      <div class="cred"><div class="n">24<em>/</em>7</div><div class="l">Round-the-clock support</div></div>
+      <div class="cred"><div class="n">MEA<em>↔</em>Global</div><div class="l">Voice &amp; messaging reach</div></div>
+    </div>
+  </div>
+</section>
 
-<!-- JavaScript for handling form submission -->
+<!-- ============ PROBLEM ============ -->
+<section class="problem pad" id="problem">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow amber">Where the money leaks</span>
+      <h2>Every day, revenue you already carry slips off your books.</h2>
+      <p>Application traffic and international calls move through your network whether you bill them or not. Three leaks account for most of it — and each one is invisible without inspection.</p>
+    </div>
+    <div class="leaks reveal">
+      <div class="leak">
+        <div class="tag">Leak 01 — Messaging</div>
+        <h3>Grey-route A2P</h3>
+        <p>Enterprise messages delivered through aggregators and intermediaries that bypass your billing, while price speculation erodes your margins. You terminate the traffic; someone else collects.</p>
+      </div>
+      <div class="leak">
+        <div class="tag">Leak 02 — Voice</div>
+        <h3>OTT &amp; SIMbox bypass</h3>
+        <p>International calls reterminated as on-net VoIP or pushed through SIMbox gateways. Interconnect revenue disappears, call quality drops, and the source is hard to trace without DPI.</p>
+      </div>
+      <div class="leak">
+        <div class="tag">Leak 03 — Reach</div>
+        <h3>Unmonetised audience</h3>
+        <p>You hold first-party signal on every subscriber interaction, yet capture none of the advertising value flowing to OTT platforms built on top of your network.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUTIONS / PILLARS ============ -->
+<section class="pad" id="solutions">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The platform</span>
+      <h2>One inspection layer. Three ways it pays back.</h2>
+      <p>Mobilink sits in the path of your messaging and voice traffic, classifies it in real time with self-learning AI, and turns that visibility into protected and net-new revenue.</p>
+    </div>
+
+    <div class="claim reveal">
+      <div class="pat">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3.5v5c0 4.6-3 8.5-7 10-4-1.5-7-5.4-7-10v-5L12 2z" stroke="#F23E46" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 12l2.3 2.3 4.7-5" stroke="#F23E46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>PATENTED<br>TECH</span>
+      </div>
+      <div class="txt">
+        <strong>The market's <b>only patented OTT Firewall.</b></strong>
+        <p>Mobilink's OTT Firewall is an innovative, AI-driven technology — the first and only solution of its kind available on the market — patented to recover A2P revenue for mobile operators.</p>
+      </div>
+    </div>
+
+    <div class="pillars">
+
+      <!-- SMS Firewall -->
+      <article class="pillar reveal" id="firewall">
+        <div class="pillar-body">
+          <div class="p-index">01 / A2P SMS FIREWALL<span class="pill">OTT FIREWALL</span></div>
+          <h3>See every message. <b>Bill what's real.</b></h3>
+          <p>Inspect, classify and price every application-to-person message crossing your network. Mobilink partners directly with apps and businesses — cutting out the intermediate hubs that manipulate pricing — so legitimate A2P is monetised and grey routes are shut.</p>
+          <ul class="feat">
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#2FE2C6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Real-time content, sender-ID and route classification</li>
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#2FE2C6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Spam, phishing and fraud filtering before delivery</li>
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#2FE2C6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Grey-route detection with transparent, direct billing</li>
+          </ul>
+        </div>
+        <div class="pillar-viz"><canvas class="mini" data-mode="sms" aria-hidden="true"></canvas></div>
+      </article>
+
+      <!-- OTT Voice Firewall -->
+      <article class="pillar alt reveal" id="voice">
+        <div class="pillar-body">
+          <div class="p-index">02 / AI OTT VOICE FIREWALL<span class="pill">PATENTED · MARKET-FIRST</span></div>
+          <h3>Trace the bypass. <b>Reclaim the call.</b></h3>
+          <p>Deep-packet inspection across your network detects OTT voice bypass and SIMbox fraud in live traffic. Self-learning models adapt as fraudsters change patterns, so detection holds up long after rules-based systems go stale.</p>
+          <ul class="feat">
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#F23E46" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>DPI-based OTT voice and grey-route call detection</li>
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#F23E46" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>SIMbox identification — integrate yours or deploy ours</li>
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#F23E46" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Adaptive AI that learns new bypass signatures over time</li>
+          </ul>
+        </div>
+        <div class="pillar-viz"><canvas class="mini" data-mode="voice" aria-hidden="true"></canvas></div>
+      </article>
+
+      <!-- Advertising -->
+      <article class="pillar reveal" id="advertising">
+        <div class="pillar-body">
+          <div class="p-index">03 / SOVEREIGN AD ECOSYSTEM</div>
+          <h3>Your own <b>sovereign ad ecosystem.</b></h3>
+          <p>Mobilink builds a sovereign advertising ecosystem owned by the operator — DMP, DSP, SSP and ad exchange running on your own first-party data. Reach subscribers with relevant, real-time offers, and optionally filter the ad trackers of global platforms so your audience, and its value, stays with you rather than Meta, Google and the rest.</p>
+          <ul class="feat">
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#2FE2C6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Operator-owned data — first-party audiences that never leave your control</li>
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#2FE2C6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Optional filtering of third-party ad trackers (Meta, Google and others)</li>
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#2FE2C6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Independence from global ad platforms — revenue stays on-net</li>
+            <li><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M4 9l3 3 6-7" stroke="#2FE2C6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Real-time, self-learning personalised campaigns</li>
+          </ul>
+        </div>
+        <div class="pillar-viz"><canvas class="mini" data-mode="ads" aria-hidden="true"></canvas></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPLOYMENT ============ -->
+<section class="deploy pad" id="deploy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Low-risk rollout</span>
+      <h2>Start by listening. Switch to enforcing when you're ready.</h2>
+      <p>Mobilink deploys in two phases so you quantify the leak before you touch live traffic — and keep control of every rule when you move to enforcement.</p>
+    </div>
+    <div class="phases reveal">
+      <div class="phase p1">
+        <div class="ph">Phase 01 — Passive</div>
+        <h3>Tap, observe, measure</h3>
+        <p>A passive tap mirrors traffic with zero impact on live service. Mobilink baselines your messaging and voice, trains on your network's own patterns, and quantifies exactly where revenue is leaking.</p>
+        <ul>
+          <li>No risk to production traffic</li>
+          <li>Audited leakage report on your real data</li>
+          <li>Models tuned to your network before enforcement</li>
+        </ul>
+      </div>
+      <div class="phase p2">
+        <div class="ph">Phase 02 — Inline</div>
+        <h3>Enforce, with the safety net on</h3>
+        <p>Move to inline enforcement once the numbers are agreed. Rules stay under your control, with safe fallback paths so legitimate traffic is never at risk while the firewall blocks and bills the rest.</p>
+        <ul>
+          <li>Operator-controlled rules and thresholds</li>
+          <li>Fail-safe routing for clean traffic</li>
+          <li>Continuous learning as new patterns appear</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY / ABOUT ============ -->
+<section class="pad" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Why Mobilink</span>
+      <h2>Built for operators, not intermediaries.</h2>
+      <p>Mobilink Synergy International helps mobile network operators overcome declining revenue trends with AI-driven messaging, voice and advertising — through direct relationships and transparent commercials.</p>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l6 3v4c0 4-2.6 7-6 9-3.4-2-6-5-6-9V5l6-3z" stroke="#2FE2C6" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3>Direct partnerships</h3>
+        <p>We connect straight to apps and businesses, removing the aggregators and price speculation that sit between you and your revenue.</p>
+      </div>
+      <div class="why">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="#2FE2C6" stroke-width="1.5"/><path d="M10 1v3M10 16v3M1 10h3M16 10h3M3.5 3.5l2 2M14.5 14.5l2 2M16.5 3.5l-2 2M5.5 14.5l-2 2" stroke="#2FE2C6" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        <h3>Self-learning AI</h3>
+        <p>Fully automated, self-learning models adapt to new fraud and bypass patterns — no manual rule-chasing to keep detection sharp.</p>
+      </div>
+      <div class="why">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#2FE2C6" stroke-width="1.5"/><path d="M2 10h16M10 2c2.5 2.2 2.5 13.8 0 16M10 2c-2.5 2.2-2.5 13.8 0 16" stroke="#2FE2C6" stroke-width="1.2"/></svg></div>
+        <h3>Global reach</h3>
+        <p>A network spanning 195 countries with strength across the Middle East and Africa, backed by 24/7 support and premium voice quality.</p>
+      </div>
+      <div class="why">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 16V8M8 16V4M13 16v-6M3 16h14" stroke="#2FE2C6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Operator-first commercials</h3>
+        <p>Flexible, attractive business models designed around your goals — protecting margin while opening genuinely new revenue lines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact pad" id="contact">
+  <div class="wrap">
+    <div class="contact-card reveal">
+      <div>
+        <span class="eyebrow">Get started</span>
+        <h2>Find out what your network is really carrying.</h2>
+        <p>Request a passive network audit. We'll baseline your messaging and voice traffic and show you where revenue is leaking — before you change a thing.</p>
+        <div class="contact-meta">
+          <div class="row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="#2FE2C6" stroke-width="1.3"/><path d="M2 4l6 4 6-4" stroke="#2FE2C6" stroke-width="1.3"/></svg>
+            <a href="mailto:info@mobilinkcorp.com">info@mobilinkcorp.com</a>
+          </div>
+          <div class="row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5c2.8 0 5 2.1 5 4.8 0 3.2-5 8.2-5 8.2s-5-5-5-8.2c0-2.7 2.2-4.8 5-4.8z" stroke="#2FE2C6" stroke-width="1.3" stroke-linejoin="round"/><circle cx="8" cy="6.2" r="1.6" stroke="#2FE2C6" stroke-width="1.3"/></svg>
+            <span>Meydan Grandstand, 6th Floor, Meydan Road,<br>Nad Al Sheba, Dubai, U.A.E.</span>
+          </div>
+        </div>
+      </div>
+      <div class="cform">
+        <label for="cName">Name</label>
+        <input id="cName" type="text" placeholder="Your name">
+        <label for="cOrg">Operator / company</label>
+        <input id="cOrg" type="text" placeholder="Mobile network operator">
+        <label for="cMsg">What would you like to solve?</label>
+        <textarea id="cMsg" placeholder="A2P revenue, OTT/SIMbox bypass, advertising…"></textarea>
+        <button class="btn btn-primary" id="sendBtn" type="button">Send enquiry
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#04231d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a class="brand" href="#top" aria-label="Mobilink International home">
+          <img class="logo" src="data:image/png;base64,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" alt="Mobilink International" width="150" height="26">
+        </a>
+        <p>Mobilink Synergy International L.L.C. — empowering mobile operators with AI-driven messaging, voice firewall and advertising solutions.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Solutions</h4>
+        <a href="#firewall">A2P SMS Firewall</a>
+        <a href="#voice">AI OTT Voice Firewall</a>
+        <a href="#advertising">Sovereign Ad Ecosystem</a>
+        <a href="#deploy">Deployment</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#about">About Mobilink</a>
+        <a href="#problem">The problem</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:info@mobilinkcorp.com">info@mobilinkcorp.com</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Mobilink Synergy International L.L.C. All rights reserved.</span>
+      <span class="mono">Dubai · U.A.E.</span>
+    </div>
+  </div>
+</footer>
+
 <script>
-function toggleMenu() {
-    const navMenu = document.querySelector('.header nav ul');
-    navMenu.classList.toggle('active');
-}
-</script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
+  /* header scroll state */
+  var hdr = document.getElementById('hdr');
+  function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > 20); }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* mobile menu */
+  var menuBtn = document.getElementById('menuBtn'), nav = document.getElementById('navlinks');
+  menuBtn.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded',false); });
+  });
+
+  /* reveal on scroll */
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:.14});
+    reveals.forEach(function(r){ io.observe(r); });
+  } else { reveals.forEach(function(r){ r.classList.add('in'); }); }
+
+  /* contact -> mailto */
+  document.getElementById('sendBtn').addEventListener('click', function(){
+    var n=document.getElementById('cName').value.trim(),
+        o=document.getElementById('cOrg').value.trim(),
+        m=document.getElementById('cMsg').value.trim();
+    var subject = encodeURIComponent('Network audit enquiry' + (o?(' — '+o):''));
+    var body = encodeURIComponent('Name: '+(n||'-')+'\nOperator: '+(o||'-')+'\n\n'+(m||''));
+    window.location.href = 'mailto:info@mobilinkcorp.com?subject='+subject+'&body='+body;
+  });
+
+  /* ---------- HERO FIREWALL FLOW ---------- */
+  var canvas = document.getElementById('flow'), ctx = canvas.getContext('2d');
+  var W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2), lineX=0, particles=[], lanes=[];
+  var COL_CYAN='#2FE2C6', COL_AMBER='#F23E46';
+
+  function resize(){
+    var r = canvas.getBoundingClientRect();
+    W=r.width; H=r.height;
+    canvas.width=W*dpr; canvas.height=H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    lineX = W*0.54;
+    lanes=[];
+    var n = Math.max(7, Math.round(H/64));
+    for(var i=0;i<n;i++){ lanes.push(H*(i+0.5)/n + (Math.random()*10-5)); }
+  }
+
+  function spawn(){
+    var lane = lanes[(Math.random()*lanes.length)|0];
+    return {
+      x: -20 - Math.random()*120,
+      y: lane + (Math.random()*16-8),
+      vx: 0.7 + Math.random()*0.9,
+      r: 1.6 + Math.random()*1.8,
+      state:'in',           // in -> pass | flag
+      flagged: Math.random() < 0.20,
+      vy:0, life:1, decided:false,
+      trail: 18 + Math.random()*22
+    };
+  }
+
+  function seed(count){ particles=[]; for(var i=0;i<count;i++){ var p=spawn(); p.x=Math.random()*W; if(p.x>lineX){ p.decided=true; p.state=p.flagged?'flag':'pass'; if(p.flagged){p.vy=(Math.random()*1.4+0.5)*(Math.random()<.5?-1:1);} } particles.push(p);} }
+
+  var scanT=0;
+  function drawLine(){
+    // inspection membrane
+    var grad = ctx.createLinearGradient(lineX,0,lineX,H);
+    grad.addColorStop(0,'rgba(47,226,198,0)');
+    grad.addColorStop(.5,'rgba(47,226,198,.55)');
+    grad.addColorStop(1,'rgba(47,226,198,0)');
+    ctx.strokeStyle=grad; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(lineX,0); ctx.lineTo(lineX,H); ctx.stroke();
+    // soft glow band
+    var g2=ctx.createLinearGradient(lineX-26,0,lineX+26,0);
+    g2.addColorStop(0,'rgba(47,226,198,0)');
+    g2.addColorStop(.5,'rgba(47,226,198,.06)');
+    g2.addColorStop(1,'rgba(47,226,198,0)');
+    ctx.fillStyle=g2; ctx.fillRect(lineX-26,0,52,H);
+    // scanning highlight
+    var sy = (Math.sin(scanT)*0.5+0.5)*H;
+    var sg=ctx.createRadialGradient(lineX,sy,0,lineX,sy,80);
+    sg.addColorStop(0,'rgba(47,226,198,.5)');
+    sg.addColorStop(1,'rgba(47,226,198,0)');
+    ctx.fillStyle=sg; ctx.beginPath(); ctx.arc(lineX,sy,80,0,7); ctx.fill();
+  }
+
+  function step(){
+    ctx.clearRect(0,0,W,H);
+    drawLine();
+    for(var i=0;i<particles.length;i++){
+      var p=particles[i];
+      p.x += p.vx;
+      // decide at the line
+      if(!p.decided && p.x>=lineX){
+        p.decided=true;
+        if(p.flagged){ p.state='flag'; p.vy=(Math.random()*1.5+0.6)*(Math.random()<.5?-1:1); p.x=lineX; }
+        else { p.state='pass'; }
+      }
+      if(p.state==='flag'){ p.y += p.vy; p.vx*=0.985; p.life-=0.012; }
+
+      var col = (p.state==='flag')?COL_AMBER:COL_CYAN;
+      var alpha = (p.state==='flag')?Math.max(0,p.life):(p.x<lineX?0.85:1);
+
+      // trail
+      ctx.strokeStyle = (p.state==='flag')
+        ? 'rgba(242,62,70,'+(alpha*0.25)+')'
+        : 'rgba(47,226,198,'+(alpha*0.22)+')';
+      ctx.lineWidth = p.r*0.9;
+      ctx.beginPath();
+      ctx.moveTo(p.x - p.trail, p.y - (p.state==='flag'?p.vy*3:0));
+      ctx.lineTo(p.x, p.y); ctx.stroke();
+
+      // node
+      ctx.beginPath();
+      ctx.fillStyle = col; ctx.globalAlpha = alpha;
+      ctx.shadowColor = col; ctx.shadowBlur = 8;
+      ctx.arc(p.x,p.y,p.r,0,7); ctx.fill();
+      ctx.shadowBlur=0; ctx.globalAlpha=1;
+
+      // recycle
+      if(p.x > W+40 || p.life<=0 || p.y< -30 || p.y> H+30){ particles[i]=spawn(); }
+    }
+    scanT += 0.02;
+    raf = requestAnimationFrame(step);
+  }
+
+  var raf=null;
+  function start(){
+    resize();
+    var count = Math.max(60, Math.round(W/14));
+    seed(count);
+    if(reduce){ ctx.clearRect(0,0,W,H); drawLine();
+      for(var i=0;i<particles.length;i++){ var p=particles[i]; var col=p.state==='flag'?COL_AMBER:COL_CYAN;
+        ctx.fillStyle=col; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill(); }
+      return;
+    }
+    if(raf) cancelAnimationFrame(raf); step();
+  }
+  window.addEventListener('resize', function(){ resize(); seed(Math.max(60,Math.round(W/14))); });
+  start();
+
+  /* ---------- MINI VIZ in pillar cards ---------- */
+  function miniViz(cv){
+    var c=cv.getContext('2d'), mode=cv.dataset.mode, w,h, pts=[], lx=0, t=0, raf2=null;
+    function rs(){ var r=cv.getBoundingClientRect(); w=r.width; h=r.height; cv.width=w*dpr; cv.height=h*dpr; c.setTransform(dpr,0,0,dpr,0,0); lx=w*0.5; build(); }
+    function build(){
+      pts=[]; var rows=Math.max(4,Math.round(h/50));
+      var flagRate = mode==='voice'?0.34:(mode==='ads'?0.0:0.22);
+      for(var i=0;i<rows*2;i++){
+        var y=h*((i%rows)+0.5)/rows;
+        pts.push({x:Math.random()*w, y:y+(Math.random()*8-4), vx:0.4+Math.random()*0.5,
+          flagged:Math.random()<flagRate, decided:false, state:'in', vy:0, life:1, r:1.4+Math.random()*1.4});
+      }
+    }
+    function frame(){
+      c.clearRect(0,0,w,h);
+      // membrane (ads has no hard membrane — show a "fan-out" instead)
+      if(mode!=='ads'){
+        var g=c.createLinearGradient(lx,0,lx,h);
+        var base = mode==='voice'?'242,62,70':'47,226,198';
+        g.addColorStop(0,'rgba('+base+',0)'); g.addColorStop(.5,'rgba('+base+',.4)'); g.addColorStop(1,'rgba('+base+',0)');
+        c.strokeStyle=g; c.lineWidth=1.2; c.beginPath(); c.moveTo(lx,0); c.lineTo(lx,h); c.stroke();
+      }
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i]; p.x+=p.vx;
+        if(mode==='ads'){
+          // fan out from a source node into many targets (broadcast)
+          var col='#2FE2C6';
+          c.fillStyle=col; c.shadowColor=col; c.shadowBlur=7; c.globalAlpha=0.9;
+          c.beginPath(); c.arc(p.x,p.y,p.r,0,7); c.fill(); c.shadowBlur=0; c.globalAlpha=1;
+          if(p.x>w+20){ p.x=-10; p.y=h*0.5; p.vy=(Math.random()*2-1)*0.6; }
+          p.y+=p.vy;
+        } else {
+          if(!p.decided && p.x>=lx){ p.decided=true; if(p.flagged){p.state='flag'; p.vy=(Math.random()*1.3+0.5)*(Math.random()<.5?-1:1); p.x=lx;} else p.state='pass'; }
+          if(p.state==='flag'){ p.y+=p.vy; p.life-=0.014; }
+          var col2=p.state==='flag'?'#F23E46':'#2FE2C6';
+          var a=p.state==='flag'?Math.max(0,p.life):0.9;
+          c.fillStyle=col2; c.shadowColor=col2; c.shadowBlur=7; c.globalAlpha=a;
+          c.beginPath(); c.arc(p.x,p.y,p.r,0,7); c.fill(); c.shadowBlur=0; c.globalAlpha=1;
+          if(p.x>w+20||p.life<=0||p.y<-20||p.y>h+20){ p.x=-10; p.y=h*((Math.random()*1)); p.decided=false; p.state='in'; p.life=1; p.flagged=Math.random()<(mode==='voice'?0.34:0.22); }
+        }
+      }
+      t+=0.02; raf2=requestAnimationFrame(frame);
+    }
+    rs();
+    if(reduce){ frame(); cancelAnimationFrame(raf2); return; }
+    var vis=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){ if(!raf2) frame(); } else { if(raf2){cancelAnimationFrame(raf2); raf2=null;} }
+    });},{threshold:.05});
+    vis.observe(cv);
+    window.addEventListener('resize', rs);
+  }
+  document.querySelectorAll('canvas.mini').forEach(miniViz);
+})();
+</script>
 </body>
 </html>
